@@ -35,7 +35,7 @@ def calc_rg_hist(x, y, bin_):
         calc_2d_rg_hist(r, g, bin_=256)
     """
     return histogram2d(y.ravel(), x.ravel(),
-                       bins=[bin, bin], range=[[0, 1], [0, 1]])
+                       bins=[bin_, bin_], range=[[0, 1], [0, 1]])
 
 
 def contrast_stretch(array, a1, a2):
