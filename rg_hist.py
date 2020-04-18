@@ -1,4 +1,5 @@
 import argparse
+import os
 
 from rg_hist import draw_rg_hist
 
@@ -64,15 +65,19 @@ def default_output(path_in):
     return os.path.join(head, f"{filename}_hist.{ext}")
 
 
+def main():
+    parser = get_argparser()
+    args = parser.parse_args()
+
+    if args.output is None:
+        path_out = default_output(args.input)
+
+    draw_rg_hist(
+        path_in=args.input, path_out=path_out,
+        a1=args.contrast_stretch_min, a2=args.contrast_stretch_max,
+        size=args.size, blur=args.blur)
+    print(f"rg histogram: {path_out}")
 
 
-    draw_rg_hist()
-
-
-
-    print("")
-
-
-# head, tail = os.path.split(path_in)
-#         name, ext = tail.split(".")
-#         path_out = os.path.join(head, name + '_hist' + '.' + ext)
+if __name__ == '__main__':
+    main()
