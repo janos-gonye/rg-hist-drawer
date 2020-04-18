@@ -1,8 +1,8 @@
 import cv2
 
-from core import calc_img_rg_hist, rg_color_space
-from gamma import gamma_decode
-from utils import copy_luminosity
+from rg_hist.core import calc_img_rg_hist, rg_color_space
+from rg_hist.gamma import gamma_decode
+from rg_hist.utils import copy_luminosity
 
 def draw_rg_hist(path_in, path_out=None, a1=0, a2=.9975, size=256, blur=9):
     img = cv2.imread(path_in)

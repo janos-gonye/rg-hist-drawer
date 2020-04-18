@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from fast_histogram import fast_histogram
+from fast_histogram import histogram2d
 
 
 def calc_bgr(img):
@@ -34,8 +34,8 @@ def calc_rg_hist(x, y, bin_):
         b, g, r = calc_bgr(img)
         calc_2d_rg_hist(r, g, bin_=256)
     """
-    return histogram_2d(y.ravel(), x.ravel(),
-                        bins=[bin, bin], range=[[0, 1], [0, 1]])
+    return histogram2d(y.ravel(), x.ravel(),
+                       bins=[bin, bin], range=[[0, 1], [0, 1]])
 
 
 def contrast_stretch(array, a1, a2):
@@ -48,11 +48,11 @@ def contrast_stretch(array, a1, a2):
         contrast_stretch(luminosity, a1=.2, a2=1)
     """
     array_1D = np.sort(np.ravel(array))
-	min_ = array_1D[int(a1 * array_1D.shape[0])]
-	max_ = array_1D[int(a2 * array_1D.shape[0])]
-	array[array < min_] = min_  # Handle underflow
-	array[array > max_] = max_  # Handle overflow
-	return array
+    min_ = array_1D[int(a1 * array_1D.shape[0])]
+    max_ = array_1D[int(a2 * array_1D.shape[0])]
+    array[array < min_] = min_  # Handle underflow
+    array[array > max_] = max_  # Handle overflow
+    return array
 
 
 def norm_array(array, range_):
@@ -69,16 +69,16 @@ def rg_color_space(size):
     """Generate a rectangular image with the given 'size' size.
     """
     img = np.zeros((size, size, 3), np.uint8)
-	for row in range(size):
-		for col in range(size):
-			r = (col / size)
-			g = (row / size)
-			b = 1 - r - g
+    for row in range(size):
+        for col in range(size):
+            r = (col / size)
+            g = (row / size)
+            b = 1 - r - g
             # only interpreted if (y <= 1 -x)
-			if (row <= size - col):
+            if (row <= size - col):
                 img[row, col] = (b * 255, g * 255, r * 255)
-	img = np.flipud(img)
-	return img
+    img = np.flipud(img)
+    return img
 
 
 def calc_img_rg_hist(img, size=256, a1=0, a2=0.9975):
@@ -90,8 +90,8 @@ def calc_img_rg_hist(img, size=256, a1=0, a2=0.9975):
         rg_img = calc_rg_hist(img, size=256)
         cv2.imshow(rg_img)
     """
-    b, g, r = calc_bgr(img)
-    rg = calc_2d_rg_hist(r, g, size)
+    _, g, r = calc_bgr(img)
+    rg = calc_rg_hist(r, g, size)
     rg = contrast_stretch(rg, a1, a2)
-    rg = norm_array(rg, range_)
+    rg = norm_array(rg, size)
     return np.flipud(rg)
