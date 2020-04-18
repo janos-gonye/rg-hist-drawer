@@ -58,9 +58,10 @@ def get_argparser():
     return parser
 
 
-if __name__ == '__main__':
-    args = get_argparser()
-    args.parse_args()
+def default_output(path_in):
+    filename, ext = os.path.basename(path_in).split(".")
+    head, _ = os.path.split(path_in)
+    return os.path.join(head, f"{filename}_hist.{ext}")
 
 
 
