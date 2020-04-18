@@ -63,3 +63,19 @@ def norm_array(array, range_):
     if max_ > 0:
         array = (array.astype(float) / max_ * range_).astype(float)
     return array
+
+
+def rg_color_space(size):
+    """Generate a rectangular image with the given 'size' size.
+    """
+    img = np.zeros((size, size, 3), np.uint8)
+	for row in range(size):
+		for col in range(size):
+			r = (col / size)
+			g = (row / size)
+			b = 1 - r - g
+            # only interpreted if (y <= 1 -x)
+			if (row <= size - col):
+                img[row, col] = (b * 255, g * 255, r * 255)
+	img = np.flipud(img)
+	return img
