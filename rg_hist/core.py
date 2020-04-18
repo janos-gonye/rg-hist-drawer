@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-import fash_histogram import histogram_2d
+from fast_histogram import fast_histogram
 
 
 def calc_bgr(img):
