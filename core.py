@@ -53,3 +53,13 @@ def contrast_stretch(array, a1, a2):
 	array[array < min_] = min_  # Handle underflow
 	array[array > max_] = max_  # Handle overflow
 	return array
+
+
+def norm_array(array, range_):
+    """Normalize the given 'array' array.
+    The maximam value of the original array gets transformed to 'range_'.
+    """
+    max_ = array.max()
+    if max_ > 0:
+        array = (array.astype(float) / max_ * range_).astype(float)
+    return array
