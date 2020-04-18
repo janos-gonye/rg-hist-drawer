@@ -23,3 +23,16 @@ def calc_bgr(img):
     g = img[..., 1] / (img[..., 0] + img[..., 1] + img[..., 2] + 1e-6)
     b = 1 - r - g
     return b, g, r
+
+
+def calc_rg_hist(x, y, bin_):
+    """Calculate the two-dimensional rg histogram with 'bin_' bin from the
+    given 'x' and 'y' arrays.
+
+    Typical use:
+        img = cv2.imread("image.png")
+        b, g, r = calc_bgr(img)
+        calc_2d_rg_hist(r, g, bin_=256)
+    """
+    return histogram_2d(y.ravel(), x.ravel(),
+                        bins=[bin, bin], range=[[0, 1], [0, 1]])
