@@ -6,7 +6,7 @@ def gamma_correct(img, exponent):
     return ((img.copy() / 255.0) ** exponent) * 255
 
 
-def gamme_encode(img):
+def gamma_encode(img):
     return gamma_correct(img, exponent=GAMMA_ENCODE_EXPONENT)
 
 
