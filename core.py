@@ -79,3 +79,19 @@ def rg_color_space(size):
                 img[row, col] = (b * 255, g * 255, r * 255)
 	img = np.flipud(img)
 	return img
+
+
+def calc_img_rg_hist(img, size=256, a1=0, a2=0.9975):
+    """Generate the two-dimensional rg histogram of the given 'img' image
+    with 'size' size. 'a1' and 'a2' are the same as in 'contrast_stretch'.
+
+    Typical use:
+        img = cv2.imread("image.png")
+        rg_img = calc_rg_hist(img, size=256)
+        cv2.imshow(rg_img)
+    """
+    b, g, r = calc_bgr(img)
+    rg = calc_2d_rg_hist(r, g, size)
+    rg = contrast_stretch(rg, a1, a2)
+    rg = norm_array(rg, range_)
+    return np.flipud(rg)
