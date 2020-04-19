@@ -9,6 +9,7 @@ A simple script to generate an image's rg histogram.
 # Clone project
 git clone https://github.com/janos-gonye/rg-hist.git
 # Create virtualenv
+cd ./rg-hist
 virtualenv -p python3 venv
 # Activate it
 source venv/bin/activate
