@@ -69,7 +69,8 @@ def main():
     parser = get_argparser()
     args = parser.parse_args()
 
-    if args.output is None:
+    path_out = args.output
+    if path_out is None:
         path_out = default_output(args.input)
 
     draw_rg_hist(
