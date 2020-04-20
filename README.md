@@ -1,6 +1,8 @@
 # rg histogram drawer
 A simple script to generate an image's rg histogram.
 
+![Balls](./examples/balls.png)
+
 > What is rg chromaticity?
 > Find out [here](https://en.wikipedia.org/wiki/Rg_chromaticity).
 
@@ -26,5 +28,4 @@ python3 rg_hist.py --help
 ![Fall](./examples/fall.png)
 ![Decoration](./examples/decor.png)
 ![Village](./examples/village.png)
-![Balls](./examples/balls.png)
 ![Beach](./examples/beach.png)
